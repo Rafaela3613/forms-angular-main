@@ -23,9 +23,17 @@
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="telefone">Contato</label>
         <input name="telefone" id="telefone" type="tel" placeholder="(XX) XXXXX-XXXX" 
-        class="campo__escrita" ngModel/>
+        class="campo__escrita" ngModel required pattern="(\(?\d{2}\)?\s?)(\d{5}\-?\d{4})"/>
+
+        <div *ngIf="(f.controls['telefone']?.invalid && f.controls['telefone']?.touched) || f.controls['telefone']?.dirty">
+          <span class="erro__texto" *ngIf="f.controls['telefone']?.errors?.
+          ['required']">O campo de telefone deve ser preenchido.</span>
+          <span class="erro__texto" *ngIf="f.controls['telefone']?.errors?.
+          ['minlength']">O campo de telefone está faltando algo.</span>
+        </div>
       </div>
     </div>
+
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="email">E-mail</label>
       <input name="email" id="email" type="email" class="campo__escrita"

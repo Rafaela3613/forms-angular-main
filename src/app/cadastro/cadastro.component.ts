@@ -8,6 +8,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent implements OnInit {
+consultaCEP($event: FocusEvent,_t7: NgForm) {
+throw new Error('Method not implemented.');
+}
 nome: any;
 
   constructor(private router: Router) { }

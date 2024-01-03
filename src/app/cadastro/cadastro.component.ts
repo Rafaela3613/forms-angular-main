@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent implements OnInit {
+nome: any;
 
   constructor(private router: Router) { }
 

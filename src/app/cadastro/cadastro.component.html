@@ -34,7 +34,8 @@
         />
         <div *ngIf="(nascimento?.invalid && nascimento?.touched) || nascimento?.dirty">
             <app-mensagem  *ngIf="nascimento?.errors?.['required']" mensagem="A data de nascimento deve ser preenchida."></app-mensagem>
-        </div>
+            <app-mensagem  *ngIf="nascimento?.errors?.['maiorIdadeValidator']" mensagem="O usuário deve ter mais de 18 anos."></app-mensagem>
+      </div>
       </div>
 
       <div class="formulario__campo">

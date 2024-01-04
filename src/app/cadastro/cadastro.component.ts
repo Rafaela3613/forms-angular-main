@@ -1,29 +1,47 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ConsultaCepService } from '../service/consulta-cep.service';
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.css']
+  selector: "app-cadastro",
+  templateUrl: "./cadastro.component.html",
+  styleUrls: ["./cadastro.component.css"],
 })
 export class CadastroComponent implements OnInit {
-consultaCEP($event: FocusEvent,_t7: NgForm) {
-throw new Error('Method not implemented.');
-}
-nome: any;
+  constructor(
+    private router: Router,
+    private consultacepService: ConsultaCepService
+  ) {}
 
-  constructor(private router: Router) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  consultaCEP(ev: any, f: NgForm) {
+    const cep = ev.target.value;
+    if (cep !== "") {
+      this.consultacepService.getConsultaCep(cep).subscribe((resultado) => {
+        console.log(resultado);
+        this.populandoEndereco(resultado, f);
+      });
+    }
   }
 
-  cadastrar(form: NgForm){
-    if(form.valid){
-      this.router.navigate(['./sucesso'])
-    }else{
-      alert('Formulário inválido');
+  populandoEndereco(dados: any, f: NgForm){
+    f.form.patchValue({
+      endereco: dados.logradouro,
+      complemento: dados.complemento,
+      bairro: dados.bairro,
+      cidade: dados.localidade,
+      estado: dados.uf
+    })
+  }
+
+  cadastrar(form: NgForm) {
+    if (form.valid) {
+      this.router.navigate(["./sucesso"]);
+    } else {
+      alert("Formulário inválido");
     }
-      console.log(form.controls);
+    console.log(form.controls);
   }
 }
